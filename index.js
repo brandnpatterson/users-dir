@@ -1,13 +1,17 @@
-const express = require('express');
+const express = require("express");
 const app = express();
-const path = require('path');
+const path = require("path");
+const bodyParser = require("body-parser");
+
 const port = process.env.PORT || 5000;
-const router = require('./routes');
 
-app.use('/api', router);
+const router = require("./routes");
 
-app.use('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/public/index.html')),
+app.use(bodyParser.json());
+app.use("/api", router);
+
+app.use("/*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client/public/index.html")),
     err => {
       if (err) {
         res.status(500).send(err);
