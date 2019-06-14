@@ -1,7 +1,7 @@
 const { sequelize, User } = require("../models");
 
 exports.getUsers = (req, res) => {
-  res.json({ users: "users" });
+  User.findAll().then(users => res.json(users));
 };
 
 exports.postUser = (req, res) => {
