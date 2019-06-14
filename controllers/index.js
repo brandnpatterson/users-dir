@@ -1,9 +1,6 @@
 const { sequelize, User } = require("../models");
 
-exports.getUsers = (req, res) => {
-  User.findAll().then(users => res.json(users));
-};
-
+// Create User
 exports.postUser = (req, res) => {
   User.create({
     firstName: req.body.firstName,
@@ -19,4 +16,14 @@ exports.postUser = (req, res) => {
     .catch(error => {
       res.json({ error });
     });
+};
+
+// Get all Users
+exports.getUsers = (req, res) => {
+  User.findAll().then(users => res.json(users));
+};
+
+// Get User by id
+exports.getUserById = (req, res) => {
+  User.findByPk(req.params.userId).then(user => res.json(user));
 };
