@@ -1,4 +1,10 @@
-import React, { Fragment, useContext, useEffect, useState } from "react";
+import React, {
+  Fragment,
+  useContext,
+  useEffect,
+  useRef,
+  useState
+} from "react";
 import { Redirect } from "react-router-dom";
 import { Context } from "../context";
 import { inputs } from "../data";
@@ -17,18 +23,21 @@ function EditUser({ history }) {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
+    username: "",
     email: "",
     location: "",
-    jobtitle: "",
-    picture: ""
+    jobtitle: ""
   });
+  const prevUsers = useRef();
 
   useEffect(() => {
     if (!userToEdit) {
       const paramId = history.location.pathname.split("/")[2];
 
       filterToEditUser({ context, users, userId: Number(paramId) });
-    } else if (!flashMessage) {
+    } else if (!prevUsers.current) {
+      prevUsers.current = true;
+
       setFormData({
         firstname: userToEdit.firstname,
         lastname: userToEdit.lastname,
@@ -71,10 +80,10 @@ function EditUser({ history }) {
   return (
     <Fragment>
       {flashMessage && (
-        <div class="notification is-info">
+        <div className="notification is-info">
           <button
             onClick={() => resetStatus({ context })}
-            class="delete"
+            className="delete"
             style={{ right: "1.4rem", top: "1.4rem" }}
           />
           {flashMessage}
@@ -141,7 +150,7 @@ function EditUser({ history }) {
           </footer>
         </div>
       </div>
-      {redirect.value === true && <Redirect to="/" />}
+      {redirect && <Redirect to="/" />}
     </Fragment>
   );
 }

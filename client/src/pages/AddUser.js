@@ -65,7 +65,7 @@ function AddUser() {
           </button>
         </div>
       </form>
-      {redirect.value === true && <Redirect to="/thank-you" />}
+      {redirect && <Redirect to="/thank-you" />}
     </div>
   );
 }

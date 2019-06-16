@@ -34,7 +34,7 @@ export async function postNewUser({ context, formData }) {
 
     context.dispatch({
       type: REDIRECT_STATUS,
-      payload: { formData, value: true }
+      payload: true
     });
   } catch (error) {
     context.dispatch({
@@ -72,7 +72,7 @@ export async function deleteUser({ context, formData }) {
 
     context.dispatch({
       type: REDIRECT_STATUS,
-      payload: { formData: null, value: true }
+      payload: true
     });
   } catch (error) {
     context.dispatch({
@@ -90,7 +90,7 @@ export function resetStatus({ context }) {
 
   context.dispatch({
     type: REDIRECT_STATUS,
-    payload: { formData: null, value: null }
+    payload: false
   });
 }
 

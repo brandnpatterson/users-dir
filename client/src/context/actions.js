@@ -24,10 +24,7 @@ export const actions = {
   }),
   [REDIRECT_STATUS]: (state, action) => ({
     ...state,
-    redirect: {
-      value: action.payload.value,
-      data: action.payload.formData
-    }
+    redirect: action.payload
   }),
   [LOADING_STATUS]: (state, action) => ({
     ...state,

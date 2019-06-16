@@ -9,7 +9,7 @@ function Users() {
   const { loading, redirect, users } = context.state;
 
   useEffect(() => {
-    if (redirect.value) {
+    if (redirect) {
       resetStatus({ context });
     }
   });
@@ -22,41 +22,12 @@ function Users() {
     <StyledUsers>
       {loading && (
         <div className="media">
-          <figure className="media-left">
-            <p className="image is-64x64">
-              <div
-                style={{
-                  background: "#f5f5f5",
-                  height: "64px",
-                  width: "64px"
-                }}
-              />
-            </p>
-          </figure>
+          <figure className="media-left" />
           <div className="media-content">
-            <div
-              style={{
-                background: "#f5f5f5",
-                height: "1rem",
-                marginBottom: "1rem",
-                width: "10rem"
-              }}
-            />
-            <div
-              style={{
-                background: "#f5f5f5",
-                height: "1rem",
-                width: "10rem"
-              }}
-            />
+            <div className="media-text" />
+            <div className="media-text" />
             <br />
-            <div
-              style={{
-                background: "#f5f5f5",
-                height: "1rem",
-                width: "10rem"
-              }}
-            />
+            <div className="media-text" />
           </div>
           <div className="media-right" />
         </div>
@@ -132,6 +103,22 @@ const StyledUsers = styled.div`
 
     p {
       font-size: 0.9rem;
+    }
+  }
+
+  .media-left {
+    background: #f5f5f5;
+    height: 64px;
+    width: 64px;
+  }
+
+  .media-text {
+    background: #f5f5f5;
+    height: 1rem;
+    width: 10rem;
+
+    &:first-of-type {
+      margin-bottom: 1rem;
     }
   }
 `;
