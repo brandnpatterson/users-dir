@@ -3,10 +3,10 @@ const { sequelize, User } = require("../models");
 // Create User
 exports.postUser = (req, res) => {
   User.create({
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
+    firstname: req.body.firstname,
+    lastname: req.body.lastname,
     email: req.body.email,
-    jobTitle: req.body.jobTitle,
+    jobtitle: req.body.jobtitle,
     location: req.body.location,
     picture: req.body.picture
   })
@@ -45,10 +45,10 @@ exports.getUserById = (req, res) => {
 exports.updateUserById = (req, res) => {
   User.update(
     {
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
       email: req.body.email,
-      jobTitle: req.body.jobTitle,
+      jobtitle: req.body.jobtitle,
       location: req.body.location,
       picture: req.body.picture
     },
@@ -59,7 +59,9 @@ exports.updateUserById = (req, res) => {
     }
   )
     .then(user => {
-      if (user === 1) {
+      console.log(user);
+
+      if (user[0] === 1) {
         res.status(200).json({ message: "User has been updated" });
       }
 
@@ -79,7 +81,7 @@ exports.deleteUserById = (req, res) => {
     }
   })
     .then(user => {
-      if (user === 1) {
+      if (user[0] === 1) {
         res.status(200).json({ message: "User has been deleted" });
       }
 
