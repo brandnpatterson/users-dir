@@ -1,4 +1,4 @@
-import React, { Fragment, useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Context } from "../context";
 import { postNewUser } from "../context/api";
@@ -31,27 +31,32 @@ function AddUser() {
   }
 
   return (
-    <Fragment>
+    <div className="container">
       {flashMessage && <p>{flashMessage}</p>}
       <form onSubmit={onSubmit} action="post">
         {inputs.map(input => (
-          <div key={input.value} className="form-group">
+          <div key={input.value} className="field">
             <label htmlFor={input.value}>{input.name}</label>
-            <input
-              id={input.value}
-              name={input.value}
-              type={input.type}
-              value={formData[input.value]}
-              onChange={onChange}
-            />
+            <div className="control">
+              <input
+                id={input.value}
+                className="input"
+                name={input.value}
+                type={input.type}
+                value={formData[input.value]}
+                onChange={onChange}
+              />
+            </div>
           </div>
         ))}
         <div className="form-group">
-          <button type="submit">Submit</button>
+          <button type="submit" className="button is-link">
+            Submit
+          </button>
         </div>
       </form>
       {redirect.value === true && <Redirect to="/thank-you" />}
-    </Fragment>
+    </div>
   );
 }
 

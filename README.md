@@ -15,3 +15,5 @@ I used `create-react-app` to build the frontend and set up a Reducer, `axios`, `
 ## Front End Forms
 
 I built the front end logic with useReducer and useContext. I also built forms with flash messages and a redirect for creating a user.
+
+I then started to build out the styling with Bulma CSS and the placeholder images for Users.

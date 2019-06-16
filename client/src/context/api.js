@@ -57,7 +57,26 @@ export async function putUpdateUser({ context, formData }) {
   }
 }
 
-export function resetFlashMessage({ context }) {
+/* DELETE */
+export async function deleteUser({ context, formData }) {
+  try {
+    await axios.delete(`${usersUrl}/${context.state.userToEdit.id}`);
+
+    fetchUsers({ context });
+
+    context.dispatch({
+      type: REDIRECT_STATUS,
+      payload: { formData: null, value: true }
+    });
+  } catch (error) {
+    context.dispatch({
+      type: FLASH_MESSAGE,
+      payload: `Unable to delete ${formData.firstname}. Please try again.`
+    });
+  }
+}
+
+export function resetStatus({ context }) {
   context.dispatch({
     type: FLASH_MESSAGE,
     payload: null

@@ -2,14 +2,14 @@ import React, { useContext } from "react";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { Context } from "../context";
-import { resetFlashMessage } from "../context/api";
+import { resetStatus } from "../context/api";
 
 function Header() {
   const context = useContext(Context);
 
   function onClick() {
     if (context.state.redirect !== null) {
-      resetFlashMessage({ context });
+      resetStatus({ context });
     }
   }
 

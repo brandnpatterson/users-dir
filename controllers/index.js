@@ -8,7 +8,8 @@ exports.postUser = (req, res) => {
     email: req.body.email,
     jobtitle: req.body.jobtitle,
     location: req.body.location,
-    picture: req.body.picture
+    picture: req.body.picture,
+    username: req.body.username
   })
     .then(user => res.json(user))
     .catch(err => res.json(err));
@@ -28,16 +29,7 @@ exports.getUserById = (req, res) => {
       id: req.params.userId
     }
   })
-    .then(user => {
-      if (user) {
-        res.json(user);
-      }
-
-      res.status(404).json({
-        error: "No user found with requested id",
-        id: req.params.userId
-      });
-    })
+    .then(user => res.json(user))
     .catch(err => res.json(err));
 };
 
@@ -50,7 +42,8 @@ exports.updateUserById = (req, res) => {
       email: req.body.email,
       jobtitle: req.body.jobtitle,
       location: req.body.location,
-      picture: req.body.picture
+      picture: req.body.picture,
+      username: req.body.username
     },
     {
       where: {
@@ -58,18 +51,7 @@ exports.updateUserById = (req, res) => {
       }
     }
   )
-    .then(user => {
-      console.log(user);
-
-      if (user[0] === 1) {
-        res.status(200).json({ message: "User has been updated" });
-      }
-
-      res.status(404).json({
-        error: "No user found with requested id",
-        id: req.params.userId
-      });
-    })
+    .then(user => res.status(200).json({ message: "User has been updated" }))
     .catch(err => res.json(err));
 };
 
@@ -80,15 +62,6 @@ exports.deleteUserById = (req, res) => {
       id: req.params.userId
     }
   })
-    .then(user => {
-      if (user[0] === 1) {
-        res.status(200).json({ message: "User has been deleted" });
-      }
-
-      res.status(404).json({
-        error: "No user found with requested id",
-        id: req.params.userId
-      });
-    })
+    .then(() => res.status(200).json({ message: "User has been deleted" }))
     .catch(err => res.json(err));
 };

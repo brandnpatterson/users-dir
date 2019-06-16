@@ -1,5 +1,6 @@
-import React, { useContext, useEffect, useState, Fragment } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Route, Switch } from "react-router-dom";
+import styled from "styled-components";
 import { Context } from "./context";
 import { fetchUsers } from "./context/api";
 
@@ -24,7 +25,7 @@ function App() {
   }, [context, loading]);
 
   return (
-    <Fragment>
+    <StyledApp>
       <Header />
       <Switch>
         <Route exact path="/" component={Users} />
@@ -33,8 +34,13 @@ function App() {
         <Route path="/thank-you" component={ThankYou} />
       </Switch>
       <Footer />
-    </Fragment>
+    </StyledApp>
   );
 }
+
+const StyledApp = styled.div`
+  margin: 0 auto;
+  max-width: 80%;
+`;
 
 export default App;

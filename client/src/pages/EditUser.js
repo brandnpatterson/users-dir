@@ -1,13 +1,14 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Context } from "../context";
-import { filterToEditUser, putUpdateUser } from "../context/api";
 import { inputs } from "../data";
 import { sanitize } from "dompurify";
+import { deleteUser, filterToEditUser, putUpdateUser } from "../context/api";
 
 function EditUser({ history }) {
   const context = useContext(Context);
   const { flashMessage, redirect, users, userToEdit } = context.state;
+  const [modal, setModal] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -54,36 +55,80 @@ function EditUser({ history }) {
     });
   }
 
-  function onClick() {
-    console.log("Are you sure?");
+  function onToggleModal() {
+    setModal(true);
+  }
+
+  function onConfirmDelete() {
+    deleteUser({ context, formData });
   }
 
   return (
     <Fragment>
+      <div className={"modal" + (modal ? " is-active" : "")}>
+        <div className="modal-background" />
+        <div className="modal-card">
+          <header className="modal-card-head">
+            <p className="modal-card-title">
+              Are you sure you want to delete this User?
+            </p>
+            <button
+              className="delete"
+              aria-label="close"
+              onClick={() => setModal(false)}
+            />
+          </header>
+          <footer className="modal-card-foot">
+            <button
+              onClick={onConfirmDelete}
+              type="button"
+              className="button is-danger"
+            >
+              Delete
+            </button>
+            <button
+              type="button"
+              onClick={() => setModal(false)}
+              className="button"
+            >
+              Cancel
+            </button>
+          </footer>
+        </div>
+      </div>
       {flashMessage && <p>{flashMessage}</p>}
       <form onSubmit={onSubmit} action="post">
         {inputs.map(input => (
-          <div key={input.value} className="form-group">
+          <div key={input.value} className="field">
             <label htmlFor={input.value}>{input.name}</label>
-            <input
-              id={input.value}
-              name={input.value}
-              type={input.type}
-              value={formData[input.value]}
-              onChange={onChange}
-            />
+            <div className="control">
+              <input
+                id={input.value}
+                className="input"
+                name={input.value}
+                type={input.type}
+                value={formData[input.value]}
+                onChange={onChange}
+              />
+            </div>
           </div>
         ))}
-        <div className="form-group">
-          <button type="submit">Submit</button>
+        <div className="control">
+          <button type="submit" className="button">
+            Submit
+          </button>
         </div>
-        <div className="form-group">
-          <button onClick={onClick} type="button">
+        <div className="control">
+          <button
+            onClick={onToggleModal}
+            type="button"
+            className="button is-danger"
+          >
             Delete
           </button>
         </div>
       </form>
-      {redirect.value === true && <Redirect to="/success" />}
+      {redirect.value === true && <Redirect to="/" />}
     </Fragment>
   );
 }

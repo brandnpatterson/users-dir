@@ -10,6 +10,11 @@ export const inputs = [
     value: "lastname"
   },
   {
+    name: "Username",
+    type: "text",
+    value: "username"
+  },
+  {
     name: "Email",
     type: "email",
     value: "email"
@@ -23,10 +28,5 @@ export const inputs = [
     name: "Job Title",
     type: "text",
     value: "jobtitle"
-  },
-  {
-    name: "Picture",
-    type: "text",
-    value: "picture"
   }
 ];
