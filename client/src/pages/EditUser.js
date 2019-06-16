@@ -11,14 +11,14 @@ import { inputs } from "../data";
 import { sanitize } from "dompurify";
 import {
   deleteUser,
-  filterToEditUser,
+  filterToSingleUser,
   putUpdateUser,
   resetStatus
 } from "../context/api";
 
 function EditUser({ history }) {
   const context = useContext(Context);
-  const { flashMessage, redirect, users, userToEdit } = context.state;
+  const { filteredUser, flashMessage, redirect, users } = context.state;
   const [modal, setModal] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
@@ -31,20 +31,20 @@ function EditUser({ history }) {
   const prevUsers = useRef();
 
   useEffect(() => {
-    if (!userToEdit) {
-      const paramId = history.location.pathname.split("/")[2];
+    if (!filteredUser) {
+      const username = history.location.pathname.split("/")[2];
 
-      filterToEditUser({ context, users, userId: Number(paramId) });
+      filterToSingleUser({ context, username });
     } else if (!prevUsers.current) {
       prevUsers.current = true;
 
       setFormData({
-        firstname: userToEdit.firstname,
-        lastname: userToEdit.lastname,
-        username: userToEdit.username,
-        email: userToEdit.email,
-        location: userToEdit.location,
-        jobtitle: userToEdit.jobtitle
+        firstname: filteredUser.firstname,
+        lastname: filteredUser.lastname,
+        username: filteredUser.username,
+        email: filteredUser.email,
+        location: filteredUser.location,
+        jobtitle: filteredUser.jobtitle
       });
     }
   }, [
@@ -53,7 +53,7 @@ function EditUser({ history }) {
     history.location.pathname,
     setFormData,
     users,
-    userToEdit
+    filteredUser
   ]);
 
   function onSubmit(e) {

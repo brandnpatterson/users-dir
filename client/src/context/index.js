@@ -2,11 +2,10 @@ import React, { useReducer } from "react";
 import { actions } from "./actions";
 
 const initialState = {
+  filteredUser: null,
   loading: true,
   redirect: false,
-  users: [],
-  userToEdit: null,
-  userToDelete: null
+  users: []
 };
 
 export const Context = React.createContext(initialState);

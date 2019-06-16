@@ -2,11 +2,7 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Context } from "../context";
-import {
-  filterByUsername,
-  filterToEditUser,
-  resetStatus
-} from "../context/api";
+import { filterToSingleUser, resetStatus } from "../context/api";
 
 import Placeholder from "../components/Placeholder";
 
@@ -21,11 +17,11 @@ function Users() {
   });
 
   function onClick(user) {
-    filterToEditUser({ context, users, userId: user.id });
+    filterToSingleUser({ context, userId: user.id });
   }
 
   function onChangeFilter(e) {
-    filterByUsername({ context, users, value: e.target.value });
+    filterToSingleUser({ context, value: e.target.value });
   }
 
   return (
@@ -85,7 +81,7 @@ function Users() {
                   </strong>
                   <Link
                     onClick={() => onClick(user)}
-                    to={`users/${user.username}`}
+                    to={`/users/${user.username}`}
                     style={{ fontSize: "0.9rem", textAlign: "right" }}
                   >
                     @{user.username}
@@ -100,7 +96,7 @@ function Users() {
             <div className="media-right">
               <Link
                 onClick={() => onClick(user)}
-                to={`users/${user.username}/edit`}
+                to={`/users/${user.username}/edit`}
                 style={{ fontSize: "0.9rem", textAlign: "right" }}
               >
                 Edit

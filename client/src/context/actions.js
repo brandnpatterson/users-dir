@@ -1,7 +1,6 @@
 export const FETCH_USERS = "FETCH_USERS";
 export const FILTER_USERS = "FILTER_USERS";
-export const EDIT_USER = "EDIT_USER";
-export const DELETE_USER = "DELETE_USER";
+export const FILTER_USER = "FILTER_USER";
 export const FLASH_MESSAGE = "FLASH_MESSAGE";
 export const REDIRECT_STATUS = "REDIRECT_STATUS";
 export const LOADING_STATUS = "LOADING_STATUS";
@@ -15,13 +14,9 @@ export const actions = {
     ...state,
     usersFiltered: action.payload
   }),
-  [EDIT_USER]: (state, action) => ({
+  [FILTER_USER]: (state, action) => ({
     ...state,
-    userToEdit: action.payload
-  }),
-  [DELETE_USER]: (state, action) => ({
-    ...state,
-    userToDelete: action.payload
+    filteredUser: action.payload
   }),
   [FLASH_MESSAGE]: (state, action) => ({
     ...state,

@@ -2,8 +2,7 @@ import axios from "axios";
 import {
   FETCH_USERS,
   FILTER_USERS,
-  EDIT_USER,
-  DELETE_USER,
+  FILTER_USER,
   FLASH_MESSAGE,
   REDIRECT_STATUS,
   LOADING_STATUS
@@ -95,26 +94,19 @@ export function resetStatus({ context }) {
   });
 }
 
-export function filterToEditUser({ context, users, userId }) {
-  const user = users.filter(user => user.id === userId);
+/* Filter to single user */
+export function filterToSingleUser({ context, username }) {
+  const user = context.state.users.filter(user => user.username === username);
 
   context.dispatch({
-    type: EDIT_USER,
+    type: FILTER_USER,
     payload: user[0]
   });
 }
 
-export function filterToDeleteUser({ context, users, userId }) {
-  const user = users.filter(user => user.id === userId);
-
-  context.dispatch({
-    type: DELETE_USER,
-    payload: user[0]
-  });
-}
-
-export function filterByUsername({ context, users, value }) {
-  const filtered = users.filter(user => {
+/* Filter by username */
+export function filterByUsername({ context, value }) {
+  const filtered = context.state.users.filter(user => {
     return user.firstname.toLowerCase().indexOf(value.toLowerCase()) > -1;
   });
 
