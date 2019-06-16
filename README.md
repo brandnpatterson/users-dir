@@ -24,4 +24,4 @@ I configured the User creation so that each User must have a unique username. I 
 
 ## Filtering
 
-When planning the filter by properties, I first consolidated my other filters and created a reusable filter by username in order to get a single user in any case.
+When planning the filter by properties, I first consolidated my other filters and created a reusable filter by username, which is unique, in order to get a single user in any case.
