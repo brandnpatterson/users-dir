@@ -26,19 +26,21 @@ function Header() {
 }
 
 const StyledHeader = styled.header`
-  font-size: 2rem;
+  font-size: 1.5rem;
   padding: 2rem 0 5rem;
+
   a {
     color: black;
-    text-decoration: none;
-    padding: 1rem;
     margin-right: 1rem;
+    padding: 0.5rem;
+    text-decoration: none;
+
     &:hover {
-      border-bottom: 4px solid black;
+      border-bottom: 4px solid lightgray;
     }
   }
   .active {
-    border-bottom: 4px solid black;
+    border-bottom: 4px solid lightgray;
     box-shadow: 0 10px 6px -6px rgba(0, 0, 0, 0.125);
   }
 `;

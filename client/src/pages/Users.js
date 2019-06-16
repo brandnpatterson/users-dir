@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Context } from "../context";
 import { filterToEditUser, resetStatus } from "../context/api";
+
+import Placeholder from "../components/Placeholder";
 
 function Users() {
   const context = useContext(Context);
@@ -21,42 +23,43 @@ function Users() {
   return (
     <StyledUsers>
       {loading && (
-        <div className="media">
-          <figure className="media-left" />
-          <div className="media-content">
-            <div className="media-text" />
-            <div className="media-text" />
-            <br />
-            <div className="media-text" />
-          </div>
-          <div className="media-right" />
-        </div>
+        <Fragment>
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+        </Fragment>
       )}
       {loading === false && users.length === 0 ? (
-        <div className="media">
-          <figure className="media-left">
-            <p className="image is-64x64">
-              <img
-                src="https://randomuser.me/api/portraits/med/men/11.jpg"
-                alt="user"
-              />
-            </p>
-          </figure>
-          <div className="media-content">
-            <div className="content">
-              <p>
-                <strong style={{ marginRight: "0.5rem" }}>John Doe</strong>
-                <small>@username</small>
-                <br />
+        <Fragment>
+          <div className="media">
+            <figure className="media-left">
+              <p className="image is-64x64">
+                <img
+                  src="https://randomuser.me/api/portraits/med/men/11.jpg"
+                  alt="user"
+                />
               </p>
-              <p>Welcome!</p>
-              <Link style={{ fontSize: "0.9rem" }} to="/users/add">
-                Add a user to begin
-              </Link>
+            </figure>
+            <div className="media-content">
+              <div className="content">
+                <p>
+                  <strong style={{ marginRight: "0.5rem" }}>John Doe</strong>
+                  <small>@username</small>
+                  <br />
+                </p>
+                <p>Welcome!</p>
+                <Link style={{ fontSize: "0.9rem" }} to="/users/add">
+                  Add a user to begin
+                </Link>
+              </div>
             </div>
+            <div className="media-right" />
           </div>
-          <div className="media-right" />
-        </div>
+          <Placeholder />
+          <Placeholder />
+          <Placeholder />
+        </Fragment>
       ) : (
         users.map(user => (
           <div className="media" key={user.id}>
@@ -112,7 +115,7 @@ const StyledUsers = styled.div`
     width: 64px;
   }
 
-  .media-text {
+  .placeholder-text {
     background: #f5f5f5;
     height: 1rem;
     width: 10rem;

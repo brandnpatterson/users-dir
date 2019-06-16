@@ -150,7 +150,7 @@ function EditUser({ history }) {
           </footer>
         </div>
       </div>
-      {redirect && <Redirect to="/" />}
+      {redirect.status && <Redirect to="/" />}
     </Fragment>
   );
 }

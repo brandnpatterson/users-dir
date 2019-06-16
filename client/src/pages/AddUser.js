@@ -65,7 +65,7 @@ function AddUser() {
           </button>
         </div>
       </form>
-      {redirect && <Redirect to="/thank-you" />}
+      {redirect.status && <Redirect to="/thank-you" />}
     </div>
   );
 }
