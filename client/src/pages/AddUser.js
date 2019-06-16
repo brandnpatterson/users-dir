@@ -33,10 +33,10 @@ function AddUser() {
   return (
     <div className="container">
       {flashMessage && (
-        <div class="notification">
+        <div className="notification">
           <button
             onClick={() => resetStatus({ context })}
-            class="delete"
+            className="delete"
             style={{ right: "1.4rem", top: "1.4rem" }}
           />
           {flashMessage}

@@ -2,17 +2,29 @@ const { sequelize, User } = require("../models");
 
 // Create User
 exports.postUser = (req, res) => {
-  console.log(req.body);
-
-  User.create({
-    firstname: req.body.firstname,
-    lastname: req.body.lastname,
-    email: req.body.email,
-    jobtitle: req.body.jobtitle,
-    location: req.body.location,
-    username: req.body.username
+  User.findOrCreate({
+    where: {
+      username: req.body.username
+    },
+    defaults: {
+      firstname: req.body.firstname,
+      lastname: req.body.lastname,
+      email: req.body.email,
+      jobtitle: req.body.jobtitle,
+      location: req.body.location,
+      username: req.body.username
+    }
   })
-    .then(user => {
+    .then(result => {
+      const user = result[0];
+      const created = result[1];
+
+      if (!created) {
+        return res
+          .status(403)
+          .json({ error: "User already exists with that username" });
+      }
+
       let person = "";
       if (Math.random() >= 0.5) {
         person = "wo";

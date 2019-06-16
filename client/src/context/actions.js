@@ -1,4 +1,5 @@
 export const FETCH_USERS = "FETCH_USERS";
+export const FILTER_USERS = "FILTER_USERS";
 export const EDIT_USER = "EDIT_USER";
 export const DELETE_USER = "DELETE_USER";
 export const FLASH_MESSAGE = "FLASH_MESSAGE";
@@ -9,6 +10,10 @@ export const actions = {
   [FETCH_USERS]: (state, action) => ({
     ...state,
     users: [...action.payload]
+  }),
+  [FILTER_USERS]: (state, action) => ({
+    ...state,
+    usersFiltered: action.payload
   }),
   [EDIT_USER]: (state, action) => ({
     ...state,

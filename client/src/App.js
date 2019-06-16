@@ -7,6 +7,7 @@ import { fetchUsers } from "./context/api";
 import Header from "./components/Header";
 
 import Users from "./pages/Users";
+import User from "./pages/User";
 import EditUser from "./pages/EditUser";
 import AddUser from "./pages/AddUser";
 import ThankYou from "./pages/ThankYou";
@@ -18,19 +19,20 @@ function App() {
   useEffect(() => {
     if (loading) {
       fetchUsers({ context });
-    }
 
-    setLoading(false);
+      setLoading(false);
+    }
   }, [context, loading]);
 
   return (
     <StyledApp>
       <Header />
       <Switch>
-        <Route exact path="/" component={Users} />
         <Route path="/users/add" component={AddUser} />
-        <Route path="/users/:userId" component={EditUser} />
+        <Route path="/users/:username/edit" component={EditUser} />
+        <Route path="/users/:username" component={User} />
         <Route path="/thank-you" component={ThankYou} />
+        <Route path="/" component={Users} />
       </Switch>
     </StyledApp>
   );

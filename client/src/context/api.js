@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   FETCH_USERS,
+  FILTER_USERS,
   EDIT_USER,
   DELETE_USER,
   FLASH_MESSAGE,
@@ -39,7 +40,7 @@ export async function postNewUser({ context, formData }) {
   } catch (error) {
     context.dispatch({
       type: FLASH_MESSAGE,
-      payload: "Something went wrong. Please try again."
+      payload: "User already exists with that username"
     });
   }
 }
@@ -53,12 +54,12 @@ export async function putUpdateUser({ context, formData }) {
 
     context.dispatch({
       type: FLASH_MESSAGE,
-      payload: `${formData.firstname} updated successfully.`
+      payload: `${formData.firstname} updated successfully`
     });
   } catch (error) {
     context.dispatch({
       type: FLASH_MESSAGE,
-      payload: `Unable to update ${formData.firstname}. Please try again.`
+      payload: `Unable to update ${formData.firstname}. Please try again`
     });
   }
 }
@@ -77,7 +78,7 @@ export async function deleteUser({ context, formData }) {
   } catch (error) {
     context.dispatch({
       type: FLASH_MESSAGE,
-      payload: `Unable to delete ${formData.firstname}. Please try again.`
+      payload: `Unable to delete ${formData.firstname}. Please try again`
     });
   }
 }
@@ -109,5 +110,16 @@ export function filterToDeleteUser({ context, users, userId }) {
   context.dispatch({
     type: DELETE_USER,
     payload: user[0]
+  });
+}
+
+export function filterByUsername({ context, users, value }) {
+  const filtered = users.filter(user => {
+    return user.firstname.toLowerCase().indexOf(value.toLowerCase()) > -1;
+  });
+
+  context.dispatch({
+    type: FILTER_USERS,
+    payload: filtered
   });
 }

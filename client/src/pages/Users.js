@@ -2,7 +2,11 @@ import React, { Fragment, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Context } from "../context";
-import { filterToEditUser, resetStatus } from "../context/api";
+import {
+  filterByUsername,
+  filterToEditUser,
+  resetStatus
+} from "../context/api";
 
 import Placeholder from "../components/Placeholder";
 
@@ -20,8 +24,13 @@ function Users() {
     filterToEditUser({ context, users, userId: user.id });
   }
 
+  function onChangeFilter(e) {
+    filterByUsername({ context, users, value: e.target.value });
+  }
+
   return (
     <StyledUsers>
+      <input onChange={onChangeFilter} type="text" />
       {loading && (
         <Fragment>
           <Placeholder />
@@ -74,7 +83,13 @@ function Users() {
                   <strong style={{ marginRight: "0.5rem" }}>
                     {user.firstname} {user.lastname}
                   </strong>
-                  <small>@{user.username}</small>
+                  <Link
+                    onClick={() => onClick(user)}
+                    to={`users/${user.username}`}
+                    style={{ fontSize: "0.9rem", textAlign: "right" }}
+                  >
+                    @{user.username}
+                  </Link>
                   <br />
                 </p>
                 <p>{user.email}</p>
@@ -85,7 +100,7 @@ function Users() {
             <div className="media-right">
               <Link
                 onClick={() => onClick(user)}
-                to={`users/${user.id}`}
+                to={`users/${user.username}/edit`}
                 style={{ fontSize: "0.9rem", textAlign: "right" }}
               >
                 Edit
