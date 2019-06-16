@@ -4,7 +4,8 @@ import {
   EDIT_USER,
   DELETE_USER,
   FLASH_MESSAGE,
-  REDIRECT_STATUS
+  REDIRECT_STATUS,
+  LOADING_STATUS
 } from "./actions";
 
 const usersUrl = "/api/users";
@@ -16,6 +17,11 @@ export async function fetchUsers({ context }) {
   context.dispatch({
     type: FETCH_USERS,
     payload: response.data
+  });
+
+  context.dispatch({
+    type: LOADING_STATUS,
+    payload: false
   });
 }
 

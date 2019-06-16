@@ -6,7 +6,7 @@ import { filterToEditUser, resetStatus } from "../context/api";
 
 function Users() {
   const context = useContext(Context);
-  const { redirect, users } = context.state;
+  const { loading, redirect, users } = context.state;
 
   useEffect(() => {
     if (redirect.value) {
@@ -20,7 +20,48 @@ function Users() {
 
   return (
     <StyledUsers>
-      {users.length === 0 ? (
+      {loading && (
+        <div className="media">
+          <figure className="media-left">
+            <p className="image is-64x64">
+              <div
+                style={{
+                  background: "#f5f5f5",
+                  height: "64px",
+                  width: "64px"
+                }}
+              />
+            </p>
+          </figure>
+          <div className="media-content">
+            <div
+              style={{
+                background: "#f5f5f5",
+                height: "1rem",
+                marginBottom: "1rem",
+                width: "10rem"
+              }}
+            />
+            <div
+              style={{
+                background: "#f5f5f5",
+                height: "1rem",
+                width: "10rem"
+              }}
+            />
+            <br />
+            <div
+              style={{
+                background: "#f5f5f5",
+                height: "1rem",
+                width: "10rem"
+              }}
+            />
+          </div>
+          <div className="media-right" />
+        </div>
+      )}
+      {loading === false && users.length === 0 ? (
         <div className="media">
           <figure className="media-left">
             <p className="image is-64x64">

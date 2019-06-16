@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
 import { Context } from "../context";
-import { postNewUser } from "../context/api";
 import { inputs } from "../data";
 import { sanitize } from "dompurify";
+import { resetStatus, postNewUser } from "../context/api";
 
 function AddUser() {
   const context = useContext(Context);
@@ -32,7 +32,16 @@ function AddUser() {
 
   return (
     <div className="container">
-      {flashMessage && <p>{flashMessage}</p>}
+      {flashMessage && (
+        <div class="notification">
+          <button
+            onClick={() => resetStatus({ context })}
+            class="delete"
+            style={{ right: "1.4rem", top: "1.4rem" }}
+          />
+          {flashMessage}
+        </div>
+      )}
       <form onSubmit={onSubmit} action="post">
         {inputs.map(input => (
           <div key={input.value} className="field">
@@ -45,6 +54,7 @@ function AddUser() {
                 type={input.type}
                 value={formData[input.value]}
                 onChange={onChange}
+                required
               />
             </div>
           </div>

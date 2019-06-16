@@ -5,7 +5,6 @@ import { Context } from "./context";
 import { fetchUsers } from "./context/api";
 
 import Header from "./components/Header";
-import Footer from "./components/Footer";
 
 import Users from "./pages/Users";
 import EditUser from "./pages/EditUser";
@@ -33,7 +32,6 @@ function App() {
         <Route path="/users/:userId" component={EditUser} />
         <Route path="/thank-you" component={ThankYou} />
       </Switch>
-      <Footer />
     </StyledApp>
   );
 }

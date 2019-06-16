@@ -3,7 +3,12 @@ import { Redirect } from "react-router-dom";
 import { Context } from "../context";
 import { inputs } from "../data";
 import { sanitize } from "dompurify";
-import { deleteUser, filterToEditUser, putUpdateUser } from "../context/api";
+import {
+  deleteUser,
+  filterToEditUser,
+  putUpdateUser,
+  resetStatus
+} from "../context/api";
 
 function EditUser({ history }) {
   const context = useContext(Context);
@@ -65,6 +70,46 @@ function EditUser({ history }) {
 
   return (
     <Fragment>
+      {flashMessage && (
+        <div class="notification is-info">
+          <button
+            onClick={() => resetStatus({ context })}
+            class="delete"
+            style={{ right: "1.4rem", top: "1.4rem" }}
+          />
+          {flashMessage}
+        </div>
+      )}
+      <form onSubmit={onSubmit} action="post">
+        {inputs.map(input => (
+          <div key={input.value} className="field">
+            <label htmlFor={input.value}>{input.name}</label>
+            <div className="control">
+              <input
+                id={input.value}
+                className="input"
+                name={input.value}
+                type={input.type}
+                value={formData[input.value]}
+                onChange={onChange}
+                required
+              />
+            </div>
+          </div>
+        ))}
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div className="control">
+            <button type="submit" className="button is-success">
+              Update
+            </button>
+          </div>
+          <div className="control">
+            <button onClick={onToggleModal} type="button" className="button">
+              Delete
+            </button>
+          </div>
+        </div>
+      </form>
       <div className={"modal" + (modal ? " is-active" : "")}>
         <div className="modal-background" />
         <div className="modal-card">
@@ -96,36 +141,6 @@ function EditUser({ history }) {
           </footer>
         </div>
       </div>
-      {flashMessage && <p>{flashMessage}</p>}
-      <form onSubmit={onSubmit} action="post">
-        {inputs.map(input => (
-          <div key={input.value} className="field">
-            <label htmlFor={input.value}>{input.name}</label>
-            <div className="control">
-              <input
-                id={input.value}
-                className="input"
-                name={input.value}
-                type={input.type}
-                value={formData[input.value]}
-                onChange={onChange}
-              />
-            </div>
-          </div>
-        ))}
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div className="control">
-            <button type="submit" className="button is-success">
-              Update
-            </button>
-          </div>
-          <div className="control">
-            <button onClick={onToggleModal} type="button" className="button">
-              Delete
-            </button>
-          </div>
-        </div>
-      </form>
       {redirect.value === true && <Redirect to="/" />}
     </Fragment>
   );

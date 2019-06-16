@@ -2,6 +2,7 @@ import React, { useReducer } from "react";
 import { actions } from "./actions";
 
 const initialState = {
+  loading: true,
   redirect: false,
   users: [],
   userToEdit: null,
