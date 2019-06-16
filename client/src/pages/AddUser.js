@@ -11,10 +11,10 @@ function AddUser() {
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
+    username: "",
     email: "",
     location: "",
-    jobtitle: "",
-    picture: ""
+    jobtitle: ""
   });
 
   function onSubmit(e) {

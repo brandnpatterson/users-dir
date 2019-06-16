@@ -2,16 +2,31 @@ const { sequelize, User } = require("../models");
 
 // Create User
 exports.postUser = (req, res) => {
+  console.log(req.body);
+
   User.create({
     firstname: req.body.firstname,
     lastname: req.body.lastname,
     email: req.body.email,
     jobtitle: req.body.jobtitle,
     location: req.body.location,
-    picture: req.body.picture,
     username: req.body.username
   })
-    .then(user => res.json(user))
+    .then(user => {
+      let person = "";
+      if (Math.random() >= 0.5) {
+        person = "wo";
+      }
+
+      User.update(
+        {
+          picture: `https://randomuser.me/api/portraits/med/${person}men/${
+            user.id
+          }.jpg`
+        },
+        { where: { id: user.id } }
+      ).then(() => res.json(user));
+    })
     .catch(err => res.json(err));
 };
 
@@ -55,7 +70,7 @@ exports.updateUserById = (req, res) => {
     .catch(err => res.json(err));
 };
 
-// Delete user by id
+// Delete User by id
 exports.deleteUserById = (req, res) => {
   User.destroy({
     where: {

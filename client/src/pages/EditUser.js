@@ -27,10 +27,10 @@ function EditUser({ history }) {
       setFormData({
         firstname: userToEdit.firstname,
         lastname: userToEdit.lastname,
+        username: userToEdit.username,
         email: userToEdit.email,
         location: userToEdit.location,
-        jobtitle: userToEdit.jobtitle,
-        picture: userToEdit.picture
+        jobtitle: userToEdit.jobtitle
       });
     }
   }, [
@@ -113,19 +113,17 @@ function EditUser({ history }) {
             </div>
           </div>
         ))}
-        <div className="control">
-          <button type="submit" className="button">
-            Submit
-          </button>
-        </div>
-        <div className="control">
-          <button
-            onClick={onToggleModal}
-            type="button"
-            className="button is-danger"
-          >
-            Delete
-          </button>
+        <div style={{ display: "flex", justifyContent: "space-between" }}>
+          <div className="control">
+            <button type="submit" className="button is-success">
+              Update
+            </button>
+          </div>
+          <div className="control">
+            <button onClick={onToggleModal} type="button" className="button">
+              Delete
+            </button>
+          </div>
         </div>
       </form>
       {redirect.value === true && <Redirect to="/" />}
