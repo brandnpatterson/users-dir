@@ -1,8 +1,8 @@
 import axios from "axios";
 import {
   FETCH_USERS,
-  FILTER_USERS,
   FILTER_USER,
+  FILTER_USERS,
   FLASH_MESSAGE,
   REDIRECT_STATUS,
   LOADING_STATUS
@@ -46,8 +46,10 @@ export async function postNewUser({ context, formData }) {
 
 /* PUT */
 export async function putUpdateUser({ context, formData }) {
+  const userId = context.state.userSingle.id;
+
   try {
-    await axios.put(`${usersUrl}/${context.state.userToEdit.id}`, formData);
+    await axios.put(`${usersUrl}/${userId}`, formData);
 
     fetchUsers({ context });
 
@@ -65,8 +67,10 @@ export async function putUpdateUser({ context, formData }) {
 
 /* DELETE */
 export async function deleteUser({ context, formData }) {
+  const userId = context.state.userSingle.id;
+
   try {
-    await axios.delete(`${usersUrl}/${context.state.userToEdit.id}`);
+    await axios.delete(`${usersUrl}/${userId}`);
 
     fetchUsers({ context });
 
@@ -94,24 +98,26 @@ export function resetStatus({ context }) {
   });
 }
 
-/* Filter to single user */
-export function filterToSingleUser({ context, username }) {
-  const user = context.state.users.filter(user => user.username === username);
+/* Filter single user */
+export function filterUserSingle({ context, username }) {
+  const userSingle = context.state.users.filter(
+    user => user.username === username
+  )[0];
 
   context.dispatch({
     type: FILTER_USER,
-    payload: user[0]
+    payload: userSingle
   });
 }
 
-/* Filter by username */
+/* Filter users by username */
 export function filterByUsername({ context, value }) {
-  const filtered = context.state.users.filter(user => {
-    return user.firstname.toLowerCase().indexOf(value.toLowerCase()) > -1;
+  const usersFiltered = context.state.users.filter(user => {
+    return user.username.toLowerCase().indexOf(value.toLowerCase()) > -1;
   });
 
   context.dispatch({
     type: FILTER_USERS,
-    payload: filtered
+    payload: usersFiltered
   });
 }

@@ -1,6 +1,6 @@
 export const FETCH_USERS = "FETCH_USERS";
-export const FILTER_USERS = "FILTER_USERS";
 export const FILTER_USER = "FILTER_USER";
+export const FILTER_USERS = "FILTER_USERS";
 export const FLASH_MESSAGE = "FLASH_MESSAGE";
 export const REDIRECT_STATUS = "REDIRECT_STATUS";
 export const LOADING_STATUS = "LOADING_STATUS";
@@ -10,13 +10,13 @@ export const actions = {
     ...state,
     users: [...action.payload]
   }),
+  [FILTER_USER]: (state, action) => ({
+    ...state,
+    userSingle: action.payload
+  }),
   [FILTER_USERS]: (state, action) => ({
     ...state,
     usersFiltered: action.payload
-  }),
-  [FILTER_USER]: (state, action) => ({
-    ...state,
-    filteredUser: action.payload
   }),
   [FLASH_MESSAGE]: (state, action) => ({
     ...state,

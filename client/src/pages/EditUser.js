@@ -11,14 +11,14 @@ import { inputs } from "../data";
 import { sanitize } from "dompurify";
 import {
   deleteUser,
-  filterToSingleUser,
+  filterUserSingle,
   putUpdateUser,
   resetStatus
 } from "../context/api";
 
 function EditUser({ history }) {
   const context = useContext(Context);
-  const { filteredUser, flashMessage, redirect, users } = context.state;
+  const { flashMessage, redirect, users, userSingle } = context.state;
   const [modal, setModal] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
@@ -31,20 +31,20 @@ function EditUser({ history }) {
   const prevUsers = useRef();
 
   useEffect(() => {
-    if (!filteredUser) {
+    if (!userSingle) {
       const username = history.location.pathname.split("/")[2];
 
-      filterToSingleUser({ context, username });
+      filterUserSingle({ context, username });
     } else if (!prevUsers.current) {
       prevUsers.current = true;
 
       setFormData({
-        firstname: filteredUser.firstname,
-        lastname: filteredUser.lastname,
-        username: filteredUser.username,
-        email: filteredUser.email,
-        location: filteredUser.location,
-        jobtitle: filteredUser.jobtitle
+        firstname: userSingle.firstname,
+        lastname: userSingle.lastname,
+        username: userSingle.username,
+        email: userSingle.email,
+        location: userSingle.location,
+        jobtitle: userSingle.jobtitle
       });
     }
   }, [
@@ -53,7 +53,7 @@ function EditUser({ history }) {
     history.location.pathname,
     setFormData,
     users,
-    filteredUser
+    userSingle
   ]);
 
   function onSubmit(e) {

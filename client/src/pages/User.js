@@ -1,21 +1,21 @@
 import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Context } from "../context";
-import { filterToSingleUser } from "../context/api";
+import { filterUserSingle } from "../context/api";
 
 function User({ history, userId }) {
   const context = useContext(Context);
-  const { filteredUser } = context.state;
+  const { userSingle } = context.state;
 
   useEffect(() => {
-    if (!filteredUser) {
+    if (!userSingle) {
       const username = history.location.pathname.split("/")[2];
 
-      filterToSingleUser({ context, username });
+      filterUserSingle({ context, username });
     }
-  }, [context, filterToSingleUser, filteredUser]);
+  }, [context, userSingle, history.location.pathname]);
 
-  if (!filteredUser) {
+  if (!userSingle) {
     return false;
   }
 
@@ -23,16 +23,16 @@ function User({ history, userId }) {
     <div className="content">
       <p>
         <strong style={{ marginRight: "0.5rem" }}>
-          {filteredUser.firstname} {filteredUser.lastname}
+          {userSingle.firstname} {userSingle.lastname}
         </strong>
-        <small>@{filteredUser.username}</small>
+        <small>@{userSingle.username}</small>
         <br />
       </p>
-      <p>{filteredUser.email}</p>
-      <p>{filteredUser.location}</p>
-      <p>{filteredUser.jobtitle}</p>
+      <p>{userSingle.email}</p>
+      <p>{userSingle.location}</p>
+      <p>{userSingle.jobtitle}</p>
       <Link
-        to={`/${filteredUser.username}/edit`}
+        to={`/${userSingle.username}/edit`}
         style={{ fontSize: "0.9rem", textAlign: "right" }}
       >
         Edit

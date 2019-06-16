@@ -1,32 +1,49 @@
-import React, { Fragment, useContext, useEffect } from "react";
+import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Context } from "../context";
-import { filterToSingleUser, resetStatus } from "../context/api";
+import {
+  filterByUsername,
+  filterUserSingle,
+  resetStatus
+} from "../context/api";
 
 import Placeholder from "../components/Placeholder";
 
 function Users() {
   const context = useContext(Context);
-  const { loading, redirect, users } = context.state;
+  const { loading, redirect, users, usersFiltered } = context.state;
+  const [currentUsers, setCurrentUsers] = useState(users);
+  const [input, setInput] = useState("");
 
   useEffect(() => {
     if (redirect) {
       resetStatus({ context });
     }
-  });
 
-  function onClick(user) {
-    filterToSingleUser({ context, userId: user.id });
+    if (usersFiltered) {
+      setCurrentUsers(usersFiltered);
+    } else {
+      setCurrentUsers(users);
+    }
+
+    if (input.value !== "") {
+      filterByUsername({ context, value: input });
+    }
+  }, [redirect, usersFiltered, context, users]);
+
+  function onNavigateToUser(user) {
+    filterUserSingle({ context, userId: user.id });
+    setInput("");
   }
 
-  function onChangeFilter(e) {
-    filterToSingleUser({ context, value: e.target.value });
+  function onChange(e) {
+    setInput(e.target.value);
   }
 
   return (
     <StyledUsers>
-      <input onChange={onChangeFilter} type="text" />
+      <input onChange={onChange} value={input} type="text" />
       {loading && (
         <Fragment>
           <Placeholder />
@@ -66,7 +83,7 @@ function Users() {
           <Placeholder />
         </Fragment>
       ) : (
-        users.map(user => (
+        currentUsers.map(user => (
           <div className="media" key={user.id}>
             <figure className="media-left">
               <p className="image is-64x64">
@@ -80,7 +97,7 @@ function Users() {
                     {user.firstname} {user.lastname}
                   </strong>
                   <Link
-                    onClick={() => onClick(user)}
+                    onClick={() => onNavigateToUser(user)}
                     to={`/users/${user.username}`}
                     style={{ fontSize: "0.9rem", textAlign: "right" }}
                   >
@@ -95,7 +112,7 @@ function Users() {
             </div>
             <div className="media-right">
               <Link
-                onClick={() => onClick(user)}
+                onClick={() => onNavigateToUser(user)}
                 to={`/users/${user.username}/edit`}
                 style={{ fontSize: "0.9rem", textAlign: "right" }}
               >

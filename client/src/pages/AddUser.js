@@ -3,7 +3,7 @@ import { Redirect } from "react-router-dom";
 import { Context } from "../context";
 import { inputs } from "../data";
 import { sanitize } from "dompurify";
-import { resetStatus, postNewUser } from "../context/api";
+import { postNewUser, resetStatus } from "../context/api";
 
 function AddUser() {
   const context = useContext(Context);

@@ -2,9 +2,10 @@ import React, { useReducer } from "react";
 import { actions } from "./actions";
 
 const initialState = {
-  filteredUser: null,
   loading: true,
   redirect: false,
+  usersFiltered: null,
+  userSingle: null,
   users: []
 };
 
