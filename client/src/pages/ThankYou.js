@@ -12,7 +12,7 @@ function ThankYou() {
 
   return (
     <div>
-      <h1>Thank you for singing up {data.firstname}!</h1>
+      <h1>Thank you for signing up {data.firstname}!</h1>
       <Link to="/"> See all users</Link>
     </div>
   );

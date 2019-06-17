@@ -123,7 +123,7 @@ const StyledUserFilter = styled.div`
   input {
     border: 2px solid #f5f5f5;
     height: 2rem;
-    margin: 1rem auto;
+    margin: 0.5rem auto;
     padding-left: 0.5rem;
   }
 
