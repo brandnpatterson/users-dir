@@ -9,16 +9,23 @@ import { Redirect } from "react-router-dom";
 import { sanitize } from "dompurify";
 import { Context } from "../context";
 import { filterUserSingle, putUpdateUser, resetStatus } from "../context/api";
-import { inputs, initialFormData } from "../data";
 
-import Modal from "../components/Modal";
+import ModalConfirmDelete from "../components/ModalConfirmDelete";
 import Notification from "../components/Notification";
+import UserForm from "../components/UserForm";
 
 function EditUser({ history }) {
   const context = useContext(Context);
   const { flashMessage, redirect, users, userSingle } = context.state;
   const [isModal, setIsModal] = useState(false);
-  const [formData, setFormData] = useState(initialFormData);
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname: "",
+    username: "",
+    email: "",
+    location: "",
+    jobtitle: ""
+  });
   const prevUsers = useRef();
 
   useEffect(() => {
@@ -74,23 +81,7 @@ function EditUser({ history }) {
           {flashMessage}
         </Notification>
       )}
-      <form onSubmit={onSubmit} action="post">
-        {inputs.map(input => (
-          <div key={input.value} className="field">
-            <label htmlFor={input.value}>{input.name}</label>
-            <div className="control">
-              <input
-                id={input.value}
-                className="input"
-                name={input.value}
-                type={input.type}
-                value={formData[input.value]}
-                onChange={onChange}
-                required
-              />
-            </div>
-          </div>
-        ))}
+      <UserForm formData={formData} onChange={onChange} onSubmit={onSubmit}>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div className="control">
             <button type="submit" className="button is-success">
@@ -103,8 +94,8 @@ function EditUser({ history }) {
             </button>
           </div>
         </div>
-      </form>
-      <Modal isModal={isModal} setIsModal={setIsModal} />
+      </UserForm>
+      <ModalConfirmDelete isModal={isModal} setIsModal={setIsModal} />
       {redirect.status && <Redirect to="/" />}
     </Fragment>
   );

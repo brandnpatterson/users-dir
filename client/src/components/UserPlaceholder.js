@@ -1,6 +1,6 @@
 import React from "react";
 
-function Placeholder() {
+function UserPlaceholder() {
   return (
     <div className="placeholder media">
       <figure className="media-left" />
@@ -15,4 +15,4 @@ function Placeholder() {
   );
 }
 
-export default Placeholder;
+export default UserPlaceholder;

@@ -8,7 +8,7 @@ const propTypes = {
   setIsModal: func.isRequired
 };
 
-function Modal({ isModal, setIsModal }) {
+function ModalConfirmDelete({ isModal, setIsModal }) {
   const context = useContext(Context);
 
   function onConfirmDelete() {
@@ -50,6 +50,6 @@ function Modal({ isModal, setIsModal }) {
   );
 }
 
-Modal.propTypes = propTypes;
+ModalConfirmDelete.propTypes = propTypes;
 
-export default Modal;
+export default ModalConfirmDelete;
