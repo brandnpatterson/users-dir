@@ -1,21 +1,16 @@
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { Context } from "../context";
-import { inputs } from "../data";
 import { sanitize } from "dompurify";
+import { Context } from "../context";
+import { inputs, initialFormData } from "../data";
 import { postNewUser, resetStatus } from "../context/api";
+
+import Notification from "../components/Notification";
 
 function AddUser() {
   const context = useContext(Context);
   const { flashMessage, redirect } = context.state;
-  const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    email: "",
-    location: "",
-    jobtitle: ""
-  });
+  const [formData, setFormData] = useState(initialFormData);
 
   function onSubmit(e) {
     e.preventDefault();
@@ -33,14 +28,12 @@ function AddUser() {
   return (
     <div className="container">
       {flashMessage && (
-        <div className="notification">
-          <button
-            onClick={() => resetStatus({ context })}
-            className="delete"
-            style={{ right: "1.4rem", top: "1.4rem" }}
-          />
+        <Notification
+          className="notification is-warning"
+          onClick={() => resetStatus({ context })}
+        >
           {flashMessage}
-        </div>
+        </Notification>
       )}
       <form onSubmit={onSubmit} action="post">
         {inputs.map(input => (

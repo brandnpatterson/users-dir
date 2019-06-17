@@ -27,10 +27,8 @@ function Users() {
       setCurrentUsers(users);
     }
 
-    if (input.value !== "") {
-      filterByUsername({ context, value: input });
-    }
-  }, [redirect, usersFiltered, context, users]);
+    filterByUsername({ context, value: input });
+  }, [context, input, redirect, users, usersFiltered]);
 
   function onNavigateToUser(user) {
     filterUserSingle({ context, userId: user.id });

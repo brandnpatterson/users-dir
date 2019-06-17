@@ -6,28 +6,19 @@ import React, {
   useState
 } from "react";
 import { Redirect } from "react-router-dom";
-import { Context } from "../context";
-import { inputs } from "../data";
 import { sanitize } from "dompurify";
-import {
-  deleteUser,
-  filterUserSingle,
-  putUpdateUser,
-  resetStatus
-} from "../context/api";
+import { Context } from "../context";
+import { filterUserSingle, putUpdateUser, resetStatus } from "../context/api";
+import { inputs, initialFormData } from "../data";
+
+import Modal from "../components/Modal";
+import Notification from "../components/Notification";
 
 function EditUser({ history }) {
   const context = useContext(Context);
   const { flashMessage, redirect, users, userSingle } = context.state;
-  const [modal, setModal] = useState(false);
-  const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    email: "",
-    location: "",
-    jobtitle: ""
-  });
+  const [isModal, setIsModal] = useState(false);
+  const [formData, setFormData] = useState(initialFormData);
   const prevUsers = useRef();
 
   useEffect(() => {
@@ -70,24 +61,18 @@ function EditUser({ history }) {
   }
 
   function onToggleModal() {
-    setModal(true);
-  }
-
-  function onConfirmDelete() {
-    deleteUser({ context, formData });
+    setIsModal(true);
   }
 
   return (
     <Fragment>
       {flashMessage && (
-        <div className="notification is-info">
-          <button
-            onClick={() => resetStatus({ context })}
-            className="delete"
-            style={{ right: "1.4rem", top: "1.4rem" }}
-          />
+        <Notification
+          className="notification is-success"
+          onClick={() => resetStatus({ context })}
+        >
           {flashMessage}
-        </div>
+        </Notification>
       )}
       <form onSubmit={onSubmit} action="post">
         {inputs.map(input => (
@@ -119,37 +104,7 @@ function EditUser({ history }) {
           </div>
         </div>
       </form>
-      <div className={"modal" + (modal ? " is-active" : "")}>
-        <div className="modal-background" />
-        <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">
-              Are you sure you want to delete this User?
-            </p>
-            <button
-              className="delete"
-              aria-label="close"
-              onClick={() => setModal(false)}
-            />
-          </header>
-          <footer className="modal-card-foot">
-            <button
-              onClick={onConfirmDelete}
-              type="button"
-              className="button is-danger"
-            >
-              Delete
-            </button>
-            <button
-              type="button"
-              onClick={() => setModal(false)}
-              className="button"
-            >
-              Cancel
-            </button>
-          </footer>
-        </div>
-      </div>
+      <Modal isModal={isModal} setIsModal={setIsModal} />
       {redirect.status && <Redirect to="/" />}
     </Fragment>
   );

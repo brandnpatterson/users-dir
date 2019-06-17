@@ -30,3 +30,10 @@ export const inputs = [
     value: "jobtitle"
   }
 ];
+
+// assign the input values to object keys with the value of an empty string
+export const initialFormData = {};
+
+inputs.forEach(input => {
+  if (!initialFormData[input.value]) initialFormData[input.value] = "";
+});

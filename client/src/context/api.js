@@ -66,7 +66,7 @@ export async function putUpdateUser({ context, formData }) {
 }
 
 /* DELETE */
-export async function deleteUser({ context, formData }) {
+export async function deleteUser({ context }) {
   const userId = context.state.userSingle.id;
 
   try {
@@ -81,7 +81,7 @@ export async function deleteUser({ context, formData }) {
   } catch (error) {
     context.dispatch({
       type: FLASH_MESSAGE,
-      payload: `Unable to delete ${formData.firstname}. Please try again`
+      payload: `Unable to delete user. Please try again`
     });
   }
 }

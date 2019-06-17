@@ -40,7 +40,8 @@ function App() {
 
 const StyledApp = styled.div`
   margin: 0 auto;
-  max-width: 80%;
+  max-width: 45rem;
+  width: 80%;
 `;
 
 export default App;
