@@ -61,7 +61,7 @@ function UserForm({ children, formData, onChange, onSubmit }) {
               type={input.type}
               value={formData[input.value]}
               onChange={onChange}
-              maxLength="30"
+              maxLength="20"
               required
             />
           </div>

@@ -2,12 +2,9 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { Context } from "../context";
-import {
-  filterByUsername,
-  filterUserSingle,
-  resetStatus
-} from "../context/api";
+import { filterUserSingle, resetStatus } from "../context/api";
 
+import UserFilter from "../components/UserFilter";
 import UserPlaceholder from "../components/UserPlaceholder";
 
 function Users() {
@@ -15,6 +12,7 @@ function Users() {
   const { loading, redirect, users, usersFiltered } = context.state;
   const [currentUsers, setCurrentUsers] = useState(users);
   const [filterInput, setFilterInput] = useState("");
+  const [checkboxes, setCheckboxes] = useState([]);
 
   useEffect(() => {
     if (redirect) {
@@ -26,8 +24,6 @@ function Users() {
     } else {
       setCurrentUsers(users);
     }
-
-    filterByUsername({ context, value: filterInput });
   }, [context, filterInput, redirect, users, usersFiltered]);
 
   function onNavigateToUser(user) {
@@ -41,7 +37,12 @@ function Users() {
 
   return (
     <StyledUsers>
-      <input onChange={onChange} value={filterInput} type="text" />
+      <UserFilter
+        checkboxes={checkboxes}
+        setCheckboxes={setCheckboxes}
+        onChange={onChange}
+        filterInput={filterInput}
+      />
       {loading && (
         <Fragment>
           <UserPlaceholder />
@@ -127,10 +128,8 @@ function Users() {
 }
 
 const StyledUsers = styled.div`
-
   .media {
     border: 2px solid #f5f5f5;
-    max-width:
     min-height: 164px;
     padding: 1.5rem;
 

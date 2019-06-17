@@ -110,14 +110,21 @@ export function filterUserSingle({ context, username }) {
   });
 }
 
-/* Filter users by username */
-export function filterByUsername({ context, value }) {
-  const usersFiltered = context.state.users.filter(user => {
-    return user.username.toLowerCase().indexOf(value.toLowerCase()) > -1;
-  });
+/* Filter users by autocomplete */
+export function filterByAutocomplete({ radio, context, filterInput }) {
+  if (radio) {
+    const usersFiltered = context.state.users.filter(user => {
+      return user[radio].toLowerCase().indexOf(filterInput.toLowerCase()) > -1;
+    });
+
+    return context.dispatch({
+      type: FILTER_USERS,
+      payload: usersFiltered
+    });
+  }
 
   context.dispatch({
     type: FILTER_USERS,
-    payload: usersFiltered
+    payload: context.state.users
   });
 }
