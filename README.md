@@ -10,7 +10,7 @@ I created endpoints for each type of request and tested them using Postman
 
 ## Client
 
-I used `create-react-app` to build the frontend and set up a Reducer, `axios`, `react-router`, and fetched the Users list. I added a heade and the pages for the CRUD requests.
+I used `create-react-app` to build the frontend and set up a Reducer, `axios`, `react-router`, and fetched the Users list. I added a header and the pages for the CRUD requests.
 
 ## Front End Forms and Styling
 
