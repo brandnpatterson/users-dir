@@ -25,3 +25,7 @@ I configured the User creation so that each User must have a unique username. I 
 ## Filtering
 
 When planning the filter by properties, I first consolidated my other filters and created a reusable filter by username, which is unique, in order to get a single user in any case. I then had to differentiate between filter by one and filter the group of users. I decided on a radio filter for User properties.
+
+## Hosting
+
+I hosted this repo on [Heroku](https://users-dir.herokuapp.com) using ClearDB
