@@ -1,4 +1,4 @@
-# postlight-code-challenge
+# Users Directory
 
 ## Database Connection
 
