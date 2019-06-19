@@ -9,14 +9,6 @@ import { users } from "../__mockData__";
 import { fetchUsers } from "../context/api";
 
 describe("<App />", () => {
-  let data;
-  const context = {
-    dispatch: ({ type, payload }) => {
-      data = payload;
-    },
-    state: { users }
-  };
-
   mockAxios.get.mockResolvedValue({
     data: {
       users
@@ -24,7 +16,16 @@ describe("<App />", () => {
   });
 
   it("should mount the component", async () => {
-    const res = await fetchUsers({ context });
+    let data;
+    const FETCH_USERS = "FETCH_USERS";
+    const context = {
+      dispatch: ({ type, payload }) => {
+        data = payload;
+      },
+      state: { users }
+    };
+
+    await fetchUsers({ context });
 
     const wrapper = shallow(
       <MemoryRouter>
@@ -36,6 +37,10 @@ describe("<App />", () => {
       </MemoryRouter>
     );
 
-    expect(res).not.toEqual(users);
+    if (data.type === FETCH_USERS) {
+      expect(data).toEqual(users);
+    } else {
+      expect(data).toEqual(false);
+    }
   });
 });
