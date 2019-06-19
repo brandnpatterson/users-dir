@@ -28,5 +28,7 @@ describe("<App />", () => {
         </App>
       </MemoryRouter>
     );
+
+    expect(wrapper).not.toEqual(null);
   });
 });

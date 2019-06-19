@@ -29,3 +29,7 @@ When planning the filter by properties, I first consolidated my other filters an
 ## Hosting
 
 I hosted this repo on [Heroku](https://users-dir.herokuapp.com) using ClearDB
+
+## Testing
+
+When I wrote my unit tests, i realized that I had not accounted for if the url had a path that was not assigned to a user. This prompted me to create a redirect for that case.

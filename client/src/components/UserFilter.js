@@ -49,11 +49,11 @@ function UserFilter({ onChange, filterInput }) {
   const [isToggled, setIsToggled] = useState(false);
 
   useEffect(() => {
-    filterByAutocomplete({ radio, context, filterInput });
+    filterByAutocomplete({ context, filterInput, radio });
   }, [context, filterInput, radio]);
 
   function onRadioChange(e) {
-    filterByAutocomplete({ radio: e.target.value, context, filterInput });
+    filterByAutocomplete({ context, filterInput, radio: e.target.value });
     setRadio(e.target.value);
   }
 
@@ -63,7 +63,7 @@ function UserFilter({ onChange, filterInput }) {
 
   return (
     <StyledUserFilter>
-      <button class="button" onClick={onsetIsToggled}>
+      <button className="button" onClick={onsetIsToggled}>
         {isToggled ? <h1>Filter By &#9650;</h1> : <h1>Filter By &#9660;</h1>}
       </button>
       <div className="radio-group" onChange={onRadioChange}>

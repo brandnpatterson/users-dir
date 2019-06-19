@@ -32,6 +32,10 @@ function AddUser() {
     });
   }
 
+  if (redirect.status) {
+    return <Redirect to="/thank-you" />;
+  }
+
   return (
     <div className="container">
       {flashMessage && (
@@ -49,7 +53,6 @@ function AddUser() {
           </button>
         </div>
       </UserForm>
-      {redirect.status && <Redirect to="/thank-you" />}
     </div>
   );
 }

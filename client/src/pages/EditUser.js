@@ -18,6 +18,7 @@ function EditUser({ history }) {
   const context = useContext(Context);
   const { flashMessage, redirect, users, userSingle } = context.state;
   const [isModal, setIsModal] = useState(false);
+  const [notUserRedirect, setNotUserRedirect] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -31,8 +32,13 @@ function EditUser({ history }) {
   useEffect(() => {
     if (!userSingle) {
       const username = history.location.pathname.split("/")[2];
+      const userExists = users.filter(user => user.username === username);
 
-      filterUserSingle({ context, username });
+      if (userExists.length > 0) {
+        filterUserSingle({ context, username });
+      } else {
+        setNotUserRedirect(true);
+      }
     } else if (!prevUsers.current) {
       prevUsers.current = true;
 
@@ -71,6 +77,14 @@ function EditUser({ history }) {
     setIsModal(true);
   }
 
+  if (notUserRedirect) {
+    return <Redirect to="/" />;
+  }
+
+  if (redirect.status) {
+    return <Redirect to="/" />;
+  }
+
   return (
     <Fragment>
       {flashMessage && (
@@ -96,7 +110,7 @@ function EditUser({ history }) {
         </div>
       </UserForm>
       <ModalConfirmDelete isModal={isModal} setIsModal={setIsModal} />
-      {redirect.status && <Redirect to="/" />}
+      {}
     </Fragment>
   );
 }

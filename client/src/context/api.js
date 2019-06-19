@@ -111,7 +111,7 @@ export function filterUserSingle({ context, username }) {
 }
 
 /* Filter users by autocomplete */
-export function filterByAutocomplete({ radio, context, filterInput }) {
+export function filterByAutocomplete({ context, filterInput, radio }) {
   if (radio) {
     const usersFiltered = context.state.users.filter(user => {
       return user[radio].toLowerCase().indexOf(filterInput.toLowerCase()) > -1;
