@@ -22,6 +22,10 @@ function AddUser() {
   function onSubmit(e) {
     e.preventDefault();
 
+    if (formData.username.toLowerCase() === "add") {
+      return alert("Please choose another username");
+    }
+
     postNewUser({ context, formData });
   }
 
