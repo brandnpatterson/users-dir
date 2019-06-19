@@ -1,7 +1,7 @@
 {
   "name": "users-dir",
   "version": "1.0.0",
-  "description": "Postlight Code Challenge",
+  "description": "Users Directory",
   "author": "Brandon Patterson",
   "main": "index.js",
   "scripts": {
