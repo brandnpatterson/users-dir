@@ -2,45 +2,13 @@ import React, { useContext, useEffect, useState } from "react";
 import { func, string } from "prop-types";
 import styled from "styled-components";
 import { Context } from "../context";
+import { inputs } from "../data";
 import { filterByAutocomplete } from "../context/api";
 
 const propTypes = {
   onChange: func.isRequired,
   filterInput: string.isRequired
 };
-
-export const radioButtons = [
-  {
-    checked: true,
-    name: "First Name",
-    value: "firstname"
-  },
-  {
-    checked: false,
-    name: "Last Name",
-    value: "lastname"
-  },
-  {
-    checked: false,
-    name: "Username",
-    value: "username"
-  },
-  {
-    checked: false,
-    name: "Email",
-    value: "email"
-  },
-  {
-    checked: false,
-    name: "Location",
-    value: "location"
-  },
-  {
-    checked: false,
-    name: "Job Title",
-    value: "jobtitle"
-  }
-];
 
 function UserFilter({ onChange, filterInput }) {
   const context = useContext(Context);
@@ -68,7 +36,7 @@ function UserFilter({ onChange, filterInput }) {
       </button>
       <div className="radio-group" onChange={onRadioChange}>
         {isToggled &&
-          radioButtons.map(radio => {
+          inputs.map(radio => {
             return (
               <label key={radio.value} className="radio">
                 <input
