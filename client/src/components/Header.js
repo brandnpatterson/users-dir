@@ -18,7 +18,7 @@ function Header() {
       <NavLink exact to="/" onClick={onClick}>
         Users
       </NavLink>
-      <NavLink to="/users/add" onClick={onClick}>
+      <NavLink to="/add" onClick={onClick}>
         Add
       </NavLink>
     </StyledHeader>

@@ -70,7 +70,7 @@ function Users() {
                   <br />
                 </p>
                 <p>Welcome!</p>
-                <Link style={{ fontSize: "0.9rem" }} to="/users/add">
+                <Link style={{ fontSize: "0.9rem" }} to="/add">
                   Add a user to begin
                 </Link>
               </div>

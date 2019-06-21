@@ -28,7 +28,7 @@ function App() {
     <StyledApp>
       <Header />
       <Switch>
-        <Route path="/users/add" component={AddUser} />
+        <Route path="/add" component={AddUser} />
         <Route path="/users/:username/edit" component={EditUser} />
         <Route path="/users/:username" component={User} />
         <Route path="/thank-you" component={ThankYou} />

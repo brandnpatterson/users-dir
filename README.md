@@ -33,3 +33,7 @@ When I wrote my unit tests, i realized that I had not accounted for if the url h
 ## Hosting
 
 I hosted this repo on [Heroku](https://users-dir.herokuapp.com) using ClearDB
+
+## Routing
+
+I fixed a routing bug by changing the add route to /add instead of /users/add
