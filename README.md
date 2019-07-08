@@ -16,6 +16,7 @@ Create, read, update, delete, and filter users
 ### Frontend
 
 - [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+- [React Hooks](https://reactjs.org/docs/hooks-intro.html) - Let you use state and other React features without writing a class
 - [Create React App](https://facebook.github.io/create-react-app/) - Create React apps with no build configuration
 - [React Router](https://reacttraining.com/react-router/) - Declarative routing for React
 - [Prop Types](https://github.com/facebook/prop-types/) - Runtime type checking for React props
