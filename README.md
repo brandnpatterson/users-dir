@@ -1,6 +1,6 @@
 # Users Directory
 
-[Users Dir](https://users-dir.herokuapp.com/)
+[Users Dir](https://users-dir.herokuapp.com)
 
 Create, read, update, delete, and filter users
 
