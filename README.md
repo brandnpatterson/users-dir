@@ -1,39 +1,33 @@
 # Users Directory
 
-## Database Connection
+[users-dir.herokuapp.com](https://users-dir.herokuapp.com/) Create, read, update, delete, and filter users
 
-I created a new database with Sequel Pro and then created a User model with the sequelize-cli. This generated the database connection model which is used in the controllers. I then added the config details with variables from the .env file.
+## Built With
 
-## REST API
+### Backend
 
-I created endpoints for each type of request and tested them using Postman
+- [Node](https://nodejs.org/) - JavaScript runtime built on Chrome's V8 JavaScript engine
+- [Express](https://expressjs.com/) - Fast, unopinionated, minimalist web framework for Node.js
+- [MySQL](https://www.mysql.com/) - The world's most popular open source database
 
-## Client
+### Frontend
 
-I used `create-react-app` to build the frontend and set up a Reducer, `axios`, `react-router`, and fetched the Users list. I added a header and the pages for the CRUD requests.
+- [React](https://reactjs.org/) - A JavaScript library for building user interfaces
+- [Create React App](https://facebook.github.io/create-react-app/) - Create React apps with no build configuration
+- [React Router](https://reacttraining.com/react-router/) - Declarative routing for React
+- [Prop Types](https://github.com/facebook/prop-types/) - Runtime type checking for React props
+- [Bulma CSS](https://bulma.io/) - free, open source CSS framework based on Flexbox
+- [Styled Components](https://www.styled-components.com/) - Visual primitives for the component age
+- [ESLint](https://stylelint.io/) - Linter for JavaScript
+- [Stylelint](https://stylelint.io/) - Linter for Styles
+- [Axios](https://github.com/axios/axios/) - Promise based HTTP client
+- [Jest](https://jestjs.io/) - Snapshot, Unit, and Integration Testing Library
+- [Enzyme](https://airbnb.io/enzyme/) - Testing Library built for React Components
 
-## Front End Forms and Styling
+## Authors
 
-I built the front end logic with useReducer and useContext. I also built forms with flash messages and a redirect for creating a user.
+**Brandon Patterson** - [brandnpatterson](https://github.com/brandnpatterson)
 
-I then started to build out the styling with Bulma CSS and the placeholder images for Users.
+## License
 
-## Unique username
-
-I configured the User creation so that each User must have a unique username. I retained all error messages in the api file on the frontend, but considered moving them to the backend.
-
-## Filtering
-
-When planning the filter by properties, I first consolidated my other filters and created a reusable filter by username, which is unique, in order to get a single user in any case. I then had to differentiate between filter by one and filter the group of users. I decided on a radio filter for User properties.
-
-## Testing
-
-When I wrote my unit tests, i realized that I had not accounted for if the url had a path that was not assigned to a user. This prompted me to create a redirect for that case.
-
-## Hosting
-
-I hosted this repo on [Heroku](https://users-dir.herokuapp.com) using ClearDB
-
-## Routing
-
-I fixed a routing bug by changing the add route to /add instead of /users/add
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
