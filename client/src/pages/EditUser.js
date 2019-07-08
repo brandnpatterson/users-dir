@@ -20,12 +20,30 @@ function EditUser({ history }) {
   const [isModal, setIsModal] = useState(false);
   const [notUserRedirect, setNotUserRedirect] = useState(false);
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    email: "",
-    location: "",
-    jobtitle: ""
+    firstname: {
+      valid: true,
+      value: ""
+    },
+    lastname: {
+      valid: true,
+      value: ""
+    },
+    username: {
+      valid: true,
+      value: ""
+    },
+    email: {
+      valid: true,
+      value: ""
+    },
+    location: {
+      valid: true,
+      value: ""
+    },
+    jobtitle: {
+      valid: true,
+      value: ""
+    }
   });
   const prevUsers = useRef();
 
@@ -43,12 +61,30 @@ function EditUser({ history }) {
       prevUsers.current = true;
 
       setFormData({
-        firstname: userSingle.firstname,
-        lastname: userSingle.lastname,
-        username: userSingle.username,
-        email: userSingle.email,
-        location: userSingle.location,
-        jobtitle: userSingle.jobtitle
+        firstname: {
+          valid: true,
+          value: userSingle.firstname
+        },
+        lastname: {
+          valid: true,
+          value: userSingle.lastname
+        },
+        username: {
+          valid: true,
+          value: userSingle.username
+        },
+        email: {
+          valid: true,
+          value: userSingle.email
+        },
+        location: {
+          valid: true,
+          value: userSingle.location
+        },
+        jobtitle: {
+          valid: true,
+          value: userSingle.jobtitle
+        }
       });
     }
   }, [
@@ -60,16 +96,18 @@ function EditUser({ history }) {
     userSingle
   ]);
 
-  function onSubmit(e) {
-    e.preventDefault();
-
+  function onSubmit() {
     putUpdateUser({ context, formData });
   }
 
-  function onChange(e) {
+  function onChange(e, validation) {
     setFormData({
       ...formData,
-      [e.target.name]: sanitize(e.target.value)
+      ...validation,
+      [e.target.name]: {
+        value: sanitize(e.target.value),
+        valid: formData[e.target.name].valid
+      }
     });
   }
 
@@ -95,7 +133,12 @@ function EditUser({ history }) {
           {flashMessage}
         </Notification>
       )}
-      <UserForm formData={formData} onChange={onChange} onSubmit={onSubmit}>
+      <UserForm
+        formData={formData}
+        onChange={onChange}
+        onSubmit={onSubmit}
+        setFormData={setFormData}
+      >
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div className="control">
             <button type="submit" className="button is-success">

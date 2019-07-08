@@ -11,24 +11,43 @@ function AddUser() {
   const context = useContext(Context);
   const { flashMessage, redirect } = context.state;
   const [formData, setFormData] = useState({
-    firstname: "",
-    lastname: "",
-    username: "",
-    email: "",
-    location: "",
-    jobtitle: ""
+    firstname: {
+      value: "",
+      valid: true
+    },
+    lastname: {
+      value: "",
+      valid: true
+    },
+    username: {
+      value: "",
+      valid: true
+    },
+    email: {
+      value: "",
+      valid: true
+    },
+    location: {
+      value: "",
+      valid: true
+    },
+    jobtitle: {
+      value: "",
+      valid: true
+    }
   });
 
-  function onSubmit(e) {
-    e.preventDefault();
-
+  function onSubmit() {
     postNewUser({ context, formData });
   }
 
   function onChange(e) {
     setFormData({
       ...formData,
-      [e.target.name]: sanitize(e.target.value)
+      [e.target.name]: {
+        value: sanitize(e.target.value),
+        valid: formData[e.target.name].valid
+      }
     });
   }
 
@@ -46,7 +65,12 @@ function AddUser() {
           {flashMessage}
         </Notification>
       )}
-      <UserForm formData={formData} onChange={onChange} onSubmit={onSubmit}>
+      <UserForm
+        formData={formData}
+        onChange={onChange}
+        onSubmit={onSubmit}
+        setFormData={setFormData}
+      >
         <div className="form-group">
           <button type="submit" className="button is-link">
             Submit

@@ -55,12 +55,12 @@ export async function putUpdateUser({ context, formData }) {
 
     context.dispatch({
       type: FLASH_MESSAGE,
-      payload: `${formData.firstname} updated successfully`
+      payload: `${formData.firstname.value} updated successfully`
     });
   } catch (error) {
     context.dispatch({
       type: FLASH_MESSAGE,
-      payload: `Unable to update ${formData.firstname}. Please try again`
+      payload: `Unable to update ${formData.firstname.value}. Please try again`
     });
   }
 }
