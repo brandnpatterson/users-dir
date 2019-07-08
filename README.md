@@ -1,7 +1,7 @@
 # Users Directory
 
-<a href="https://users-dir.herokuapp.com/" target="_blank" rel="noreferrer noopener">Users Dir</a>
-<br />
+[Users Dir](https://users-dir.herokuapp.com/)
+
 Create, read, update, delete, and filter users
 
 ## Built With
