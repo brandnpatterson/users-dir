@@ -6,7 +6,6 @@ import React, {
   useState
 } from "react";
 import { Redirect } from "react-router-dom";
-import { sanitize } from "dompurify";
 import { Context } from "../context";
 import { filterUserSingle, putUpdateUser, resetStatus } from "../context/api";
 
@@ -100,17 +99,6 @@ function EditUser({ history }) {
     putUpdateUser({ context, formData });
   }
 
-  function onChange(e, validation) {
-    setFormData({
-      ...formData,
-      ...validation,
-      [e.target.name]: {
-        value: sanitize(e.target.value),
-        valid: formData[e.target.name].valid
-      }
-    });
-  }
-
   function onToggleModal() {
     setIsModal(true);
   }
@@ -135,7 +123,6 @@ function EditUser({ history }) {
       )}
       <UserForm
         formData={formData}
-        onChange={onChange}
         onSubmit={onSubmit}
         setFormData={setFormData}
       >

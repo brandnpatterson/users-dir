@@ -15,7 +15,7 @@ export const inputs = [
   },
   {
     checked: false,
-    error: "Please enter a username with no spaces",
+    error: "Please enter a username",
     name: "Username",
     regex: /^[a-zA-Z0-9]+$/,
     value: "username"

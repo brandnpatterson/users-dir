@@ -30,12 +30,33 @@ const propTypes = {
       valid: bool.isRequired
     })
   }),
-  onChange: func.isRequired,
   onSubmit: func.isRequired,
   setFormData: func
 };
 
-function UserForm({ children, formData, onChange, onSubmit, setFormData }) {
+function UserForm({ children, formData, onSubmit, setFormData }) {
+  function onChange(e) {
+    function isValid() {
+      const input = inputs.find(
+        input => input.name.toLowerCase().replace(" ", "") === e.target.name
+      );
+
+      if (input.regex) {
+        return input.regex.test(e.target.value);
+      }
+
+      return true;
+    }
+
+    setFormData({
+      ...formData,
+      [e.target.name]: {
+        value: sanitize(e.target.value),
+        valid: isValid()
+      }
+    });
+  }
+
   function onHandleSubmit(e) {
     e.preventDefault();
 

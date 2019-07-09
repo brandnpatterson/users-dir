@@ -1,6 +1,5 @@
 import React, { useContext, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { sanitize } from "dompurify";
 import { Context } from "../context";
 import { postNewUser, resetStatus } from "../context/api";
 
@@ -41,16 +40,6 @@ function AddUser() {
     postNewUser({ context, formData });
   }
 
-  function onChange(e) {
-    setFormData({
-      ...formData,
-      [e.target.name]: {
-        value: sanitize(e.target.value),
-        valid: formData[e.target.name].valid
-      }
-    });
-  }
-
   if (redirect.status) {
     return <Redirect to="/thank-you" />;
   }
@@ -67,7 +56,6 @@ function AddUser() {
       )}
       <UserForm
         formData={formData}
-        onChange={onChange}
         onSubmit={onSubmit}
         setFormData={setFormData}
       >
