@@ -27,8 +27,17 @@ export async function fetchUsers({ context }) {
 
 /* POST */
 export async function postNewUser({ context, formData }) {
+  const formValues = {
+    firstname: formData.firstname.value,
+    lastname: formData.lastname.value,
+    username: formData.username.value,
+    email: formData.email.value,
+    jobtitle: formData.jobtitle.value,
+    location: formData.location.value
+  };
+
   try {
-    await axios.post(usersUrl, formData);
+    await axios.post(usersUrl, formValues);
 
     fetchUsers({ context });
 
@@ -47,9 +56,17 @@ export async function postNewUser({ context, formData }) {
 /* PUT */
 export async function putUpdateUser({ context, formData }) {
   const userId = context.state.userSingle.id;
+  const formValues = {
+    firstname: formData.firstname.value,
+    lastname: formData.lastname.value,
+    username: formData.username.value,
+    email: formData.email.value,
+    jobtitle: formData.jobtitle.value,
+    location: formData.location.value
+  };
 
   try {
-    await axios.put(`${usersUrl}/${userId}`, formData);
+    await axios.put(`${usersUrl}/${userId}`, formValues);
 
     fetchUsers({ context });
 
