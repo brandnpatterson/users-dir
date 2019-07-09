@@ -73,13 +73,17 @@ function UserForm({ children, formData, onSubmit, setFormData }) {
           valid,
           value: formValue
         };
+      } else {
+        acc[inputName] = {
+          valid: true,
+          value: formValue
+        };
       }
 
       return acc;
     }, {});
 
     setFormData({
-      ...formData,
       ...validation
     });
 
