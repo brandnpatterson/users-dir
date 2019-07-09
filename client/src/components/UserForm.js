@@ -60,11 +60,12 @@ function UserForm({ children, formData, onSubmit, setFormData }) {
   function onHandleSubmit(e) {
     e.preventDefault();
 
-    const formValues = Object.values(formData).map(input => input);
-
     const validation = inputs.reduce((acc, input, index) => {
       const inputName = input.name.toLowerCase().replace(/\s/g, "");
-      const formValue = sanitize(formValues[index].value);
+
+      const formValue = Object.entries(formData).find(
+        input => input[0] === inputName
+      )[1].value;
 
       if (input.regex) {
         const valid = input.regex.test(formValue);
@@ -97,7 +98,10 @@ function UserForm({ children, formData, onSubmit, setFormData }) {
   return (
     <form onSubmit={onHandleSubmit} action="post">
       {inputs.map((input, index) => {
-        const formValues = Object.values(formData).map(input => input);
+        const inputName = input.name.toLowerCase().replace(/\s/g, "");
+        const formValid = Object.entries(formData).find(
+          input => input[0] === inputName
+        )[1].valid;
 
         return (
           <div key={input.value} className="field">
@@ -112,7 +116,7 @@ function UserForm({ children, formData, onSubmit, setFormData }) {
                 onChange={onChange}
                 maxLength="50"
               />
-              {formValues[index].valid === false && (
+              {formValid === false && (
                 <span style={{ color: "red" }}>{input.error}</span>
               )}
             </div>
