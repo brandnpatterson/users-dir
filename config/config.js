@@ -16,6 +16,6 @@ module.exports = {
     dialect: "mysql"
   },
   production: {
-    use_env_variable: "CLEARDB_DATABASE_URL"
+    use_env_variable: "JAWSDB_URL"
   }
 };

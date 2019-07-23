@@ -30,6 +30,8 @@ exports.postUser = (req, res) => {
         person = "wo";
       }
 
+      console.log(result);
+
       User.update(
         {
           picture: `https://randomuser.me/api/portraits/med/${person}men/${
